@@ -1,17 +1,16 @@
-//
-//  ICoffeeMachine.h
-//  Coffee Machine
-//
-//  Created by Angad Pal Singh on 24/06/20.
-//  Copyright © 2020 abc. All rights reserved.
-//
+/**
+ICoffeeMachine is the only header file which needs to be exposed. The rest of the code can be an abstraction for the end user.
+We can use the createCoffeeMachineFromJson() Factory method to create the Coffee Machine.
+ */
+#include <memory>
 #include <string>
 #include <unordered_map>
-#include <iostream>
-
-#include "json/json.h"
+#include <utility>
+#include <vector>
 
 using namespace std;
+using Beverage = pair<string, unordered_map<string, int>>;
+using Ingredients = unordered_map<string, int>;
 
 class ICoffeeMachine {
 public:
@@ -19,10 +18,7 @@ public:
     virtual void refillItem(string item_name, int quantity) = 0;
 
     // Prepare a set of beverages as requested in the input.
-    virtual void prepareDrinks(Json::Value beverages) = 0;
-
-protected:
-    unordered_map<string, int> _availableItems; // Available quantities for each of the ingredients present in the machine.
-    int _outlets; // Total number of outlets in the machine.
-    int _item_capacity; // Maximum quantity for each type of item which the machine can hold.
+    virtual void prepareDrinks(vector<Beverage> beverages) = 0;
 };
+
+std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile);
