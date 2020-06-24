@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13FD099F24A3562400403469 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD099E24A3562400403469 /* main.cpp */; };
+		13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09A724A35E8100403469 /* jsoncpp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		13FD099B24A3562400403469 /* Coffee Machine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Coffee Machine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13FD099E24A3562400403469 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		13FD09A624A35E8100403469 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
+		13FD09A724A35E8100403469 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,8 @@
 		13FD099D24A3562400403469 /* Coffee Machine */ = {
 			isa = PBXGroup;
 			children = (
+				13FD09A624A35E8100403469 /* json */,
+				13FD09A724A35E8100403469 /* jsoncpp.cpp */,
 				13FD099E24A3562400403469 /* main.cpp */,
 			);
 			path = "Coffee Machine";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13FD099F24A3562400403469 /* main.cpp in Sources */,
+				13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

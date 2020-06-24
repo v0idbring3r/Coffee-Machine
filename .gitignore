@@ -31,4 +31,5 @@
 *.out
 *.app
 
+Xcode-Project/Coffee Machine.xcodeproj/xcuserdata/
 *.DS_Store
