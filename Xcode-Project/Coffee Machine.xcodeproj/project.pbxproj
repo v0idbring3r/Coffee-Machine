@@ -10,17 +10,19 @@
 		13FD099F24A3562400403469 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD099E24A3562400403469 /* main.cpp */; };
 		13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09A724A35E8100403469 /* jsoncpp.cpp */; };
 		13FD09AC24A37BC700403469 /* CoffeeMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */; };
+		13FD09B124A3B90500403469 /* test.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13FD09B024A3B8E500403469 /* test.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		13FD099924A3562400403469 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = .;
+			dstSubfolderSpec = 16;
 			files = (
+				13FD09B124A3B90500403469 /* test.json in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -32,6 +34,7 @@
 		13FD09A924A37BB400403469 /* ICoffeeMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICoffeeMachine.h; sourceTree = "<group>"; };
 		13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoffeeMachine.cpp; sourceTree = "<group>"; };
 		13FD09AB24A37BC700403469 /* CoffeeMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoffeeMachine.h; sourceTree = "<group>"; };
+		13FD09B024A3B8E500403469 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 		13FD099224A3562300403469 = {
 			isa = PBXGroup;
 			children = (
+				13FD09AF24A3B8CC00403469 /* Test Files */,
 				13FD09AE24A37BFB00403469 /* Functional Tests */,
 				13FD099D24A3562400403469 /* Coffee Machine */,
 				13FD099C24A3562400403469 /* Products */,
@@ -80,6 +84,14 @@
 			children = (
 			);
 			path = "Functional Tests";
+			sourceTree = "<group>";
+		};
+		13FD09AF24A3B8CC00403469 /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				13FD09B024A3B8E500403469 /* test.json */,
+			);
+			path = "Test Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

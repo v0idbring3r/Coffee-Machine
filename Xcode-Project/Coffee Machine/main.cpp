@@ -12,8 +12,8 @@
 
 
 int main(int argc, const char * argv[]) {
-    auto c = createCoffeeMachineFromJson("/Users/angadps/Documents/test.json");
-    prepareDrinksFromInput(c, "/Users/angadps/Documents/test.json");
+    auto c = createCoffeeMachineFromJson("test.json");
+    prepareDrinksFromInput(c, "test.json");
     
     return 0;
 }
