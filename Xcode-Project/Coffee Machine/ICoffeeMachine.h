@@ -18,7 +18,7 @@ public:
     virtual void refillItem(string item_name, int quantity) = 0;
 
     // Prepare a set of beverages as requested in the input.
-    virtual void prepareDrinks(vector<Beverage> beverages) = 0;
+    virtual void prepareDrinks(const vector<Beverage>& beverages) = 0;
 };
 
 // Factory method to create CoffeeMachine object from JSON input.

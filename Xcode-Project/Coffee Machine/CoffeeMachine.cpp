@@ -12,11 +12,47 @@
 #include "json/json.h"
 
 void CoffeeMachine::refillItem(string item_name, int quantity) {
-    
+    if (_availableItems.find(item_name) != _availableItems.end()) {
+        // Ingredient is already present in some quantity.
+        _availableItems[item_name] = min(_availableItems[item_name] + quantity, _item_capacity); // Don't exceed maximum capacity.
+        cout << "Item " << item_name << " refilled successfully. Total quantity is: " << _availableItems[item_name] << endl;
+    }
+    else {
+        // Ingredient is added for the first time.
+        _availableItems[item_name] = min(quantity, _item_capacity); // Don't exceed maximum capacity.
+        cout << quantity << " units of Item " << item_name << " added successfully" << endl;
+    }
 }
 
-void CoffeeMachine::prepareDrinks(vector<Beverage> beverages) {
-    
+void CoffeeMachine::prepareDrinks(const vector<Beverage>& beverages) {
+    for (const auto& beverage: beverages) {
+        bool ingredientsAvailable = true;
+
+        // Check all ingredients first.
+        for (auto it = beverage.second.begin(); it != beverage.second.end(); ++it) {
+            if (_availableItems.find(it->first) == _availableItems.end()) {
+                // Current ingredient is not present at all.
+                cout << beverage.first << " cannot be prepared because " << it->first << " is not available." << endl;
+                ingredientsAvailable = false;
+                break;
+            }
+            else if (_availableItems[it->first] < it->second) {
+                // Current ingredient is not present in sufficient quantity.
+                cout << beverage.first << " cannot be prepared because " << it->first << " is not sufficient." << endl;
+                ingredientsAvailable = false;
+                break;
+            }
+        }
+        
+        if (ingredientsAvailable) {
+            // Consume the required ingredients and prepare beverage.
+            for (auto it = beverage.second.begin(); it != beverage.second.end(); ++it) {
+                _availableItems[it->first] -= it->second; // Consume this ingredient.
+            }
+
+            cout << beverage.first << " is prepared." << endl;
+        }
+    }
 }
 
 CoffeeMachine::CoffeeMachine(int outlets, const IngredientList& total_items_available, int capacity) {

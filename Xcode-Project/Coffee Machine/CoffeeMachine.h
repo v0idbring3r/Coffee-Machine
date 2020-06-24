@@ -22,7 +22,7 @@ public:
     
     void refillItem(string item_name, int quantity);
 
-    void prepareDrinks(vector<Beverage> beverages);
+    void prepareDrinks(const vector<Beverage>& beverages);
 
 private:
     IngredientList _availableItems; // Available quantities for each of the ingredients present in the machine.
