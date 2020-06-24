@@ -14,18 +14,24 @@
 void CoffeeMachine::refillItem(string item_name, int quantity) {
     if (_availableItems.find(item_name) != _availableItems.end()) {
         // Ingredient is already present in some quantity.
-        _availableItems[item_name] = min(_availableItems[item_name] + quantity, _item_capacity); // Don't exceed maximum capacity.
+        _availableItems[item_name] = min(_availableItems[item_name] + quantity, _itemCapacity); // Don't exceed maximum capacity.
         cout << "Item " << item_name << " refilled successfully. Total quantity is: " << _availableItems[item_name] << endl;
     }
     else {
         // Ingredient is added for the first time.
-        _availableItems[item_name] = min(quantity, _item_capacity); // Don't exceed maximum capacity.
+        _availableItems[item_name] = min(quantity, _itemCapacity); // Don't exceed maximum capacity.
         cout << quantity << " units of Item " << item_name << " added successfully" << endl;
     }
 }
 
 void CoffeeMachine::prepareDrinks(const vector<Beverage>& beverages) {
-    for (const auto& beverage: beverages) {
+    vector<future<void>> futures;
+    std::mutex mut;
+
+    // THis is the helper function which will be passed to each thread in the pool.
+    auto prepareDrinkLambda = [&mut, this](int id, const Beverage& beverage) {
+        mut.lock();
+        
         bool ingredientsAvailable = true;
 
         // Check all ingredients first.
@@ -52,13 +58,24 @@ void CoffeeMachine::prepareDrinks(const vector<Beverage>& beverages) {
 
             cout << beverage.first << " is prepared." << endl;
         }
+        
+        mut.unlock();
+    };
+
+    for (const auto& beverage: beverages) {
+        futures.push_back(_threadPool.push(prepareDrinkLambda, beverage));
     }
+    
+    for (int i = 0; i < futures.size(); ++i)
+        futures[i].get(); // Wait for all threads to finish.
 }
 
 CoffeeMachine::CoffeeMachine(int outlets, const IngredientList& total_items_available, int capacity) {
     _outlets = outlets;
-    _item_capacity = capacity;
+    _itemCapacity = capacity;
     _availableItems = total_items_available;
+    
+    _threadPool.resize(outlets); // If we don't assume infinte number of CPUs, we will limit the number of threads to hardware capacity. IN this case, we're limiting the number of threads to number of outlets.
 }
 
 std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile) {
@@ -75,6 +92,7 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
     IngredientList availableItems;
     int outlets;
     
+    // Parse JSON file into object.
     if (!ifs.is_open() || !parseFromStream(builder, ifs, &root, &err)) {
       cout << "Error while trying to parse JSON file" << endl;
       return nullptr;
@@ -83,6 +101,8 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
     try {
         outlets = root[MACHINE_KEY][OUTLETS_KEY][COUNT_KEY].asInt();
         availableItemsJson = root[MACHINE_KEY][ITEMS_KEY];
+        
+        // Convert items json object to hashmap.
         for(auto it = availableItemsJson.begin(); it != availableItemsJson.end(); ++it)
             availableItems[it.key().asString()] = it->asInt();
     } catch (...) {
@@ -104,7 +124,8 @@ void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine
     std::ifstream ifs(jsonFile);
     
     vector<Beverage> beverages;
-    
+
+    // Parse JSON file into object.
     if (!ifs.is_open() || !parseFromStream(builder, ifs, &root, &err)) {
       cout << "Error while trying to parse JSON file" << endl;
       return;
@@ -113,9 +134,12 @@ void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine
     try {
         auto beverageObject = root[MACHINE_KEY][BEVERAGES_KEY];
         
+        // Convert Beverages json object to vector of hashmaps.
         for(auto it = beverageObject.begin(); it != beverageObject.end(); ++it) {
             IngredientList availableItems;
             auto availableItemsJson = *it;
+            
+            // Convert items json object to hashmap.
             for(auto it = availableItemsJson.begin(); it != availableItemsJson.end(); ++it)
                 availableItems[it.key().asString()] = it->asInt();
             

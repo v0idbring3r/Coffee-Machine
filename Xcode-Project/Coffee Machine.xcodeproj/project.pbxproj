@@ -35,6 +35,7 @@
 		13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoffeeMachine.cpp; sourceTree = "<group>"; };
 		13FD09AB24A37BC700403469 /* CoffeeMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoffeeMachine.h; sourceTree = "<group>"; };
 		13FD09B024A3B8E500403469 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		13FD09B224A3CCD900403469 /* ctpl_stl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ctpl_stl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 		13FD099D24A3562400403469 /* Coffee Machine */ = {
 			isa = PBXGroup;
 			children = (
+				13FD09B224A3CCD900403469 /* ctpl_stl.h */,
 				13FD09A624A35E8100403469 /* json */,
 				13FD09A724A35E8100403469 /* jsoncpp.cpp */,
 				13FD099E24A3562400403469 /* main.cpp */,
