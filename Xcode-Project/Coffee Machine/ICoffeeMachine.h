@@ -9,8 +9,8 @@ We can use the createCoffeeMachineFromJson() Factory method to create the Coffee
 #include <vector>
 
 using namespace std;
-using IngredientList = unordered_map<string, int>;
-using Beverage = pair<string, IngredientList>;
+using IngredientList = unordered_map</*Ingredient name*/ string, /*Quantity*/ int>;
+using Beverage = pair</*Beverage Name*/ string, IngredientList>;
 
 class ICoffeeMachine {
 public:
@@ -21,4 +21,9 @@ public:
     virtual void prepareDrinks(vector<Beverage> beverages) = 0;
 };
 
+// Factory method to create CoffeeMachine object from JSON input.
+// We can create multiple factory methods to create CoffeeMachine objects in different ways.
 std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile);
+
+// Method which parses an input file to get an order for beverage preparation and uses the CoffeeMachine object to do so.
+void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine, const string jsonFile);

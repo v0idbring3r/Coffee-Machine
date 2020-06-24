@@ -14,9 +14,6 @@
  - The capacity for each different ingredient type is fixed and same for all ingredients (I've set it up as 10000 for now). We can support different capacities by including those values in the available_items property.
  - Low quantity of items will be detected if the item is filled < 20% of its capacity.
  */
-#include <fstream>
-#include <iostream>
-
 #include "ICoffeeMachine.h"
 
 class CoffeeMachine: public ICoffeeMachine {

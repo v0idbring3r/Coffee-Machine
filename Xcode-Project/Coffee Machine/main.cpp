@@ -12,10 +12,8 @@
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-//    const std::string rawJson = R"({"Age": 20, "Name": "colin"})";
-//    const auto rawJsonLength = static_cast<int>(rawJson.length());
-    
     auto c = createCoffeeMachineFromJson("/Users/angadps/Documents/test.json");
+    prepareDrinksFromInput(c, "/Users/angadps/Documents/test.json");
+    
     return 0;
 }
