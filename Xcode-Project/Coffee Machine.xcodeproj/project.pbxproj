@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13FD099F24A3562400403469 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD099E24A3562400403469 /* main.cpp */; };
 		13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09A724A35E8100403469 /* jsoncpp.cpp */; };
+		13FD09AC24A37BC700403469 /* CoffeeMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,9 @@
 		13FD099E24A3562400403469 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		13FD09A624A35E8100403469 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		13FD09A724A35E8100403469 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
+		13FD09A924A37BB400403469 /* ICoffeeMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICoffeeMachine.h; sourceTree = "<group>"; };
+		13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoffeeMachine.cpp; sourceTree = "<group>"; };
+		13FD09AB24A37BC700403469 /* CoffeeMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoffeeMachine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,7 @@
 		13FD099224A3562300403469 = {
 			isa = PBXGroup;
 			children = (
+				13FD09AE24A37BFB00403469 /* Functional Tests */,
 				13FD099D24A3562400403469 /* Coffee Machine */,
 				13FD099C24A3562400403469 /* Products */,
 			);
@@ -63,8 +68,18 @@
 				13FD09A624A35E8100403469 /* json */,
 				13FD09A724A35E8100403469 /* jsoncpp.cpp */,
 				13FD099E24A3562400403469 /* main.cpp */,
+				13FD09A924A37BB400403469 /* ICoffeeMachine.h */,
+				13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */,
+				13FD09AB24A37BC700403469 /* CoffeeMachine.h */,
 			);
 			path = "Coffee Machine";
+			sourceTree = "<group>";
+		};
+		13FD09AE24A37BFB00403469 /* Functional Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Functional Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13FD099F24A3562400403469 /* main.cpp in Sources */,
+				13FD09AC24A37BC700403469 /* CoffeeMachine.cpp in Sources */,
 				13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
