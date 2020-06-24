@@ -17,7 +17,7 @@ void CoffeeMachine::prepareDrinks(vector<Beverage> beverages) {
     
 }
 
-CoffeeMachine::CoffeeMachine(int outlets, const Ingredients& total_items_available, int capacity) {
+CoffeeMachine::CoffeeMachine(int outlets, const IngredientList& total_items_available, int capacity) {
     _outlets = outlets;
     _item_capacity = capacity;
     _availableItems = total_items_available;
@@ -29,7 +29,7 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
     Json::CharReaderBuilder builder;
     std::ifstream ifs(jsonFile);
     
-    unordered_map<string, int> availableItems;
+    IngredientList availableItems;
     int outlets;
     
     if (!parseFromStream(builder, ifs, &root, &err)) {

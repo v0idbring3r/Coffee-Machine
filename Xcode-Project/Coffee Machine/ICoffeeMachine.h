@@ -9,8 +9,8 @@ We can use the createCoffeeMachineFromJson() Factory method to create the Coffee
 #include <vector>
 
 using namespace std;
-using Beverage = pair<string, unordered_map<string, int>>;
-using Ingredients = unordered_map<string, int>;
+using IngredientList = unordered_map<string, int>;
+using Beverage = pair<string, IngredientList>;
 
 class ICoffeeMachine {
 public:

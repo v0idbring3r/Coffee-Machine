@@ -21,14 +21,14 @@
 
 class CoffeeMachine: public ICoffeeMachine {
 public:
-    CoffeeMachine(int outlets, const Ingredients& total_items_available, int capacity = 10000);
+    CoffeeMachine(int outlets, const IngredientList& total_items_available, int capacity = 10000);
     
     void refillItem(string item_name, int quantity);
 
     void prepareDrinks(vector<Beverage> beverages);
 
 private:
-    unordered_map<string, int> _availableItems; // Available quantities for each of the ingredients present in the machine.
+    IngredientList _availableItems; // Available quantities for each of the ingredients present in the machine.
     int _outlets; // Total number of outlets in the machine.
     int _item_capacity; // Maximum quantity for each type of item which the machine can hold.
 };
