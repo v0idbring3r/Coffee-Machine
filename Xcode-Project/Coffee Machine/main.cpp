@@ -10,8 +10,8 @@
 #include <fstream>
 #include "ICoffeeMachine.h"
 
-void helperFunction(std::string testFile, bool refillAndTest = false) {
-    auto coffeeMachine = createCoffeeMachineFromJson(testFile);
+void helperFunction(std::string testFile, bool refillAndTest = false, bool largeCapacity = false) {
+    auto coffeeMachine = createCoffeeMachineFromJson(testFile, largeCapacity);
     
     if (coffeeMachine)
         coffeeMachine->getItemsStatus();
@@ -79,6 +79,30 @@ int main(int argc, const char * argv[]) {
     
     // Invalid file name.
     helperFunction("test-nonexistent.json");
+    
+    // Large input.
+    //  Sample Output:
+    //    black_tea is prepared.
+    //    black_tea1 is prepared.
+    //    green_tea4 is prepared.
+    //    black_tea3 is prepared.
+    //    black_tea4 is prepared.
+    //    hot_tea3 is prepared.
+    //    green_tea is prepared.
+    //    green_tea2 is prepared.
+    //    green_tea3 is prepared.
+    //    black_tea2 is prepared.
+    //    hot_coffee1 is prepared.
+    //    hot_coffee is prepared.
+    //    hot_coffee2 is prepared.
+    //    hot_coffee3 is prepared.
+    //    hot_coffee4 is prepared.
+    //    hot_tea is prepared.
+    //    hot_tea1 is prepared.
+    //    hot_tea2 cannot be prepared because hot_water is not sufficient.
+    //    green_tea1 cannot be prepared because hot_water is not sufficient.
+    //    hot_tea4 cannot be prepared because hot_water is not sufficient.
+    helperFunction("test-large-input.json", false, true);
     
     return 0;
 }

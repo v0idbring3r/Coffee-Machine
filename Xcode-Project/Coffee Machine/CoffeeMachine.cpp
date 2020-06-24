@@ -38,6 +38,7 @@ void CoffeeMachine::prepareDrinks(const vector<Beverage>& beverages) {
     vector<future<void>> futures;
     std::mutex mut;
 
+    // We use threadpool of size N(outlets) which is used to distribute the drinks preparing tasks.
     // This is the helper function which will be passed to each thread in the pool.
     auto prepareDrinkLambda = [&mut, this](int id, const Beverage& beverage) {
         mut.lock();
@@ -88,7 +89,7 @@ CoffeeMachine::CoffeeMachine(int outlets, const IngredientList& total_items_avai
     _threadPool.resize(outlets); // If we don't assume infinte number of CPUs, we will limit the number of threads to hardware capacity. IN this case, we're limiting the number of threads to number of outlets.
 }
 
-std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile) {
+std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile, bool largeCapacity) {
     static constexpr auto MACHINE_KEY = "machine";
     static constexpr auto OUTLETS_KEY = "outlets";
     static constexpr auto COUNT_KEY = "count_n";
@@ -131,7 +132,7 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
     }
     
     
-    return make_shared<CoffeeMachine>(outlets, availableItems);
+    return make_shared<CoffeeMachine>(outlets, availableItems, largeCapacity ? 10000 : 1000);
 }
 
 void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine, const string jsonFile) {

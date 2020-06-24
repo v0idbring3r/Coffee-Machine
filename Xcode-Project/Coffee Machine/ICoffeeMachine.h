@@ -26,7 +26,8 @@ public:
 
 // Factory method to create CoffeeMachine object from JSON input.
 // We can create multiple factory methods to create CoffeeMachine objects in different ways.
-std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile);
+// We return a pointer of type ICoffeeMachine so that the user only has to call the exposed methods and not worry about the details.
+std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFile, bool largeCapacity);
 
 // Method which parses an input file to get an order for beverage preparation and uses the CoffeeMachine object to do so.
 void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine, const string jsonFile);

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13C1817E24A40133006F78A6 /* test-large-input.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13FD09BB24A3FF2600403469 /* test-large-input.json */; };
 		13FD099F24A3562400403469 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD099E24A3562400403469 /* main.cpp */; };
 		13FD09A824A35E8100403469 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09A724A35E8100403469 /* jsoncpp.cpp */; };
 		13FD09AC24A37BC700403469 /* CoffeeMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13FD09AA24A37BC700403469 /* CoffeeMachine.cpp */; };
@@ -24,6 +25,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 16;
 			files = (
+				13C1817E24A40133006F78A6 /* test-large-input.json in CopyFiles */,
 				13FD09B724A3F3A700403469 /* test-with-refill.json in CopyFiles */,
 				13FD09B824A3F3A700403469 /* test-all-ingredients-present.json in CopyFiles */,
 				13FD09B924A3F3A700403469 /* test-0-count.json in CopyFiles */,
@@ -48,6 +50,7 @@
 		13FD09B424A3F36900403469 /* test-0-count.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-0-count.json"; sourceTree = "<group>"; };
 		13FD09B524A3F36900403469 /* test-with-refill.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-with-refill.json"; sourceTree = "<group>"; };
 		13FD09B624A3F36900403469 /* test-all-ingredients-present.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-all-ingredients-present.json"; sourceTree = "<group>"; };
+		13FD09BB24A3FF2600403469 /* test-large-input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-large-input.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,7 @@
 		13FD09AF24A3B8CC00403469 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				13FD09BB24A3FF2600403469 /* test-large-input.json */,
 				13FD09B524A3F36900403469 /* test-with-refill.json */,
 				13FD09B624A3F36900403469 /* test-all-ingredients-present.json */,
 				13FD09B424A3F36900403469 /* test-0-count.json */,
