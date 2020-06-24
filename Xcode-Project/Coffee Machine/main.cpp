@@ -80,7 +80,7 @@ int main(int argc, const char * argv[]) {
     // Invalid file name.
     helperFunction("test-nonexistent.json");
     
-    // Large input.
+    // Large Capacity test: Capacity is increased to 10000.
     //  Sample Output:
     //    black_tea is prepared.
     //    black_tea1 is prepared.
