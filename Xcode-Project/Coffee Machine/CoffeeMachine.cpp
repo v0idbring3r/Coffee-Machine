@@ -11,6 +11,16 @@
 #include "CoffeeMachine.h"
 #include "json/json.h"
 
+void CoffeeMachine::getItemsStatus() {
+    cout<<endl;
+    for(const auto& item: _availableItems) {
+        // If item is less than 20% of maximum, it is running low.
+        if (item.second <= 0.2*_itemCapacity)
+            cout << item.first << " is running low." << endl;
+    }
+    cout<<endl;
+}
+
 void CoffeeMachine::refillItem(string item_name, int quantity) {
     if (_availableItems.find(item_name) != _availableItems.end()) {
         // Ingredient is already present in some quantity.
@@ -28,7 +38,7 @@ void CoffeeMachine::prepareDrinks(const vector<Beverage>& beverages) {
     vector<future<void>> futures;
     std::mutex mut;
 
-    // THis is the helper function which will be passed to each thread in the pool.
+    // This is the helper function which will be passed to each thread in the pool.
     auto prepareDrinkLambda = [&mut, this](int id, const Beverage& beverage) {
         mut.lock();
         
@@ -99,9 +109,19 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
     }
 
     try {
+        if (root.empty() || root[MACHINE_KEY].empty() || root[MACHINE_KEY][OUTLETS_KEY].empty() || root[MACHINE_KEY][OUTLETS_KEY][COUNT_KEY].empty()
+            || root[MACHINE_KEY][ITEMS_KEY].empty()) {
+            cout<< "Invalid Schema JSON" <<endl;
+            return nullptr;
+        }
         outlets = root[MACHINE_KEY][OUTLETS_KEY][COUNT_KEY].asInt();
         availableItemsJson = root[MACHINE_KEY][ITEMS_KEY];
         
+        if (outlets <= 0) {
+            cout<< "Invalid outlets value\n";
+            return nullptr;
+        }
+    
         // Convert items json object to hashmap.
         for(auto it = availableItemsJson.begin(); it != availableItemsJson.end(); ++it)
             availableItems[it.key().asString()] = it->asInt();
@@ -115,39 +135,43 @@ std::shared_ptr<ICoffeeMachine> createCoffeeMachineFromJson(const string jsonFil
 }
 
 void prepareDrinksFromInput(const std::shared_ptr<ICoffeeMachine>& coffeeMachine, const string jsonFile) {
-    static constexpr auto MACHINE_KEY = "machine";
-    static constexpr auto BEVERAGES_KEY = "beverages";
+    if (coffeeMachine) {
+        static constexpr auto MACHINE_KEY = "machine";
+        static constexpr auto BEVERAGES_KEY = "beverages";
 
-    JSONCPP_STRING err;
-    Json::Value root, availableItemsJson;
-    Json::CharReaderBuilder builder;
-    std::ifstream ifs(jsonFile);
-    
-    vector<Beverage> beverages;
-
-    // Parse JSON file into object.
-    if (!ifs.is_open() || !parseFromStream(builder, ifs, &root, &err)) {
-      cout << "Error while trying to parse JSON file" << endl;
-      return;
-    }
-
-    try {
-        auto beverageObject = root[MACHINE_KEY][BEVERAGES_KEY];
+        JSONCPP_STRING err;
+        Json::Value root, availableItemsJson;
+        Json::CharReaderBuilder builder;
+        std::ifstream ifs(jsonFile);
         
-        // Convert Beverages json object to vector of hashmaps.
-        for(auto it = beverageObject.begin(); it != beverageObject.end(); ++it) {
-            IngredientList availableItems;
-            auto availableItemsJson = *it;
-            
-            // Convert items json object to hashmap.
-            for(auto it = availableItemsJson.begin(); it != availableItemsJson.end(); ++it)
-                availableItems[it.key().asString()] = it->asInt();
-            
-            beverages.emplace_back(it.key().asString(), availableItems);
+        vector<Beverage> beverages;
+
+        // Parse JSON file into object.
+        if (!ifs.is_open() || !parseFromStream(builder, ifs, &root, &err)) {
+          cout << "Error while trying to parse JSON file" << endl;
+          return;
         }
-        
-        coffeeMachine->prepareDrinks(beverages);
-    } catch (...) {
-        cout << "Invalid Schema JSON" << endl;
+
+        try {
+            auto beverageObject = root[MACHINE_KEY][BEVERAGES_KEY];
+            
+            // Convert Beverages json object to vector of hashmaps.
+            for(auto it = beverageObject.begin(); it != beverageObject.end(); ++it) {
+                IngredientList availableItems;
+                auto availableItemsJson = *it;
+                
+                // Convert items json object to hashmap.
+                for(auto it = availableItemsJson.begin(); it != availableItemsJson.end(); ++it)
+                    availableItems[it.key().asString()] = it->asInt();
+                
+                beverages.emplace_back(it.key().asString(), availableItems);
+            }
+            
+            coffeeMachine->prepareDrinks(beverages);
+        } catch (...) {
+            cout << "Invalid Schema JSON" << endl;
+        }
     }
+    else
+        cout << "Empty coffee machine" << endl;
 }

@@ -19,6 +19,9 @@ public:
 
     // Prepare a set of beverages as requested in the input.
     virtual void prepareDrinks(const vector<Beverage>& beverages) = 0;
+    
+    // Refill/Add a particular ingredient in the machine.
+    virtual void getItemsStatus() = 0;
 };
 
 // Factory method to create CoffeeMachine object from JSON input.
